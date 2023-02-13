@@ -17,7 +17,6 @@ type users struct {
 
 func main() {
 	// var connectionString = os.Getenv("DB_CONNECTION")
-	// // var connectionString = "root:sgkp8ghd%@tcp(127.0.0.1:3306)/db_project1"
 	// db, err := sql.Open("mysql", connectionString)
 	// if err != nil {
 	// 	//return nil, err

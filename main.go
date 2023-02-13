@@ -2,7 +2,6 @@ package main
 
 import (
 	"account-service-app-project/config"
-<<<<<<< HEAD
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -16,11 +15,6 @@ type users struct {
 	password string
 }
 
-=======
-	_ "github.com/go-sql-driver/mysql"
-)
-
->>>>>>> e1da229391c00ccfdb813282f589dbde480b596a
 func main() {
 	// var connectionString = os.Getenv("DB_CONNECTION")
 	// // var connectionString = "root:sgkp8ghd%@tcp(127.0.0.1:3306)/db_project1"
@@ -43,7 +37,6 @@ func main() {
 	db := config.ConnectToDB()
 	defer db.Close()
 
-<<<<<<< HEAD
 	var input int
 	fmt.Println("selamat datang")
 	fmt.Println("silahkan pilih menu :")
@@ -60,6 +53,4 @@ func main() {
 		}
 	}
 
-=======
->>>>>>> e1da229391c00ccfdb813282f589dbde480b596a
 }

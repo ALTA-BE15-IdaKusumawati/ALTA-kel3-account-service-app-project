@@ -57,6 +57,28 @@ func main() {
 
 		feature.InsertUser(db, newUsers)
 
+	case 2:
+
+		var telpon int
+		var password string
+		fmt.Print("Masukkan nomor telepon: ")
+		fmt.Scanln(&telpon)
+		fmt.Print("Masukkan password: ")
+		fmt.Scanln(&password)
+
+		loginUsers := entities.Users{Telepon: telpon, Password: password}
+		connect := feature.LoginUser(db, loginUsers)
+
+		if connect == "login gagal" {
+			fmt.Println("Telepon atau password salah")
+		}
+		if connect == "login berhasil" {
+			fmt.Println("silahkan pilih menu :")
+			fmt.Println("menu 3 untuk melihat profil")
+			fmt.Println("menu 4 untuk mengedit profil")
+			fmt.Println("menu 5 untuk delete account")
+		}
+
 	case 0:
 		fmt.Println("terima kasih telah bertransaksi")
 		return

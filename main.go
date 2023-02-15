@@ -29,6 +29,7 @@ func main() {
 	// }
 	db := config.ConnectToDB()
 	defer db.Close()
+	var dataUserlogin entities.Users
 
 	var input int
 	fmt.Println("selamat datang")
@@ -58,7 +59,7 @@ func main() {
 		feature.InsertUser(db, newUsers)
 
 	case 2:
-
+		var connect string
 		var telpon int
 		var password string
 		fmt.Print("Masukkan nomor telepon: ")
@@ -67,16 +68,20 @@ func main() {
 		fmt.Scanln(&password)
 
 		loginUsers := entities.Users{Telepon: telpon, Password: password}
-		connect := feature.LoginUser(db, loginUsers)
+		connect, dataUserlogin = feature.LoginUser(db, loginUsers)
 
 		if connect == "login gagal" {
 			fmt.Println("Telepon atau password salah")
 		}
 		if connect == "login berhasil" {
+			fmt.Println(dataUserlogin)
 			fmt.Println("silahkan pilih menu :")
 			fmt.Println("menu 3 untuk melihat profil")
 			fmt.Println("menu 4 untuk mengedit profil")
 			fmt.Println("menu 5 untuk delete account")
+			fmt.Println("masukan nomor menu : ")
+			fmt.Scanln()
+
 		}
 
 	case 0:

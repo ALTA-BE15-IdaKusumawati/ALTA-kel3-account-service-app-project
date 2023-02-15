@@ -31,7 +31,7 @@ func EntryTopup(db *sql.DB, id string, duit entities.Topup) {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	// var n string = duit.User_ID  
+	// var n string = duit.User_ID
 	res, errUpdate := ya.Exec(id, duit.Nominal)
 	if errUpdate != nil {
 		panic(errUpdate.Error())
@@ -44,5 +44,5 @@ func EntryTopup(db *sql.DB, id string, duit entities.Topup) {
 	if a > 0 {
 		fmt.Printf("Selamat, saldo anda telah bertambah")
 	}
-	
+
 }

@@ -10,23 +10,6 @@ import (
 )
 
 func main() {
-	// var connectionString = os.Getenv("DB_CONNECTION")
-	// db, err := sql.Open("mysql", connectionString)
-	// if err != nil {
-	// 	//return nil, err
-	// 	log.Fatal("error open connection", err.Error())
-	// }
-	// // See "Important settings" section.
-	// db.SetConnMaxIdleTime(time.Minute * 3)
-	// db.SetMaxOpenConns(10)
-	// db.SetMaxIdleConns(10)
-
-	// errPing := db.Ping()
-	// if errPing != nil {
-	// 	log.Fatal("error connect to db", errPing.Error())
-	// } else {
-	// 	fmt.Println("berhasil")
-	// }
 	db := config.ConnectToDB()
 	defer db.Close()
 	var dataUserlogin entities.Users
@@ -111,9 +94,15 @@ func main() {
 					fmt.Println("Masukkan nominal topup")
 					var duit entities.Topup
 					fmt.Scanln(&duit.Nominal)
-					// amount := entities.Saldo{}
-					// id := entities.Users{}
 					feature.EntryTopup(db, dataUserlogin.ID, duit)
+				}
+			case 7:
+				{
+					fmt.Println("Riwayat topup anda")
+					fmt.Println("----------------------------------------")
+					fmt.Println("Tanggal Transaksi   | Nominal Transaksi ")
+					fmt.Println("----------------------------------------")
+					feature.TopupHistory(db, dataUserlogin.ID)
 				}
 			}
 

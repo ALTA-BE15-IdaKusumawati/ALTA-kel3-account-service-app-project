@@ -80,13 +80,26 @@ func main() {
 			fmt.Println("menu 3 untuk melihat profil")
 			fmt.Println("menu 4 untuk mengedit profil")
 			fmt.Println("menu 5 untuk delete account")
-			fmt.Println("masukan nomor menu : ")
+			fmt.Printf("masukan nomor menu : ")
 			fmt.Scanln(&input1)
 
 			switch input1 {
 			case 3:
 				{
 					feature.GetallUsers(db)
+				}
+			case 4:
+				{
+					updatedataUser := entities.Users{}
+
+					fmt.Println("Masukkan Name User:")
+					fmt.Scanln(&updatedataUser.Name)
+					fmt.Println("Masukkan Telepon User:")
+					fmt.Scanln(&updatedataUser.Telepon)
+					fmt.Println("Masukkan Email User:")
+					fmt.Scanln(&updatedataUser.Email)
+
+					feature.UpdateUser(db, dataUserlogin.ID, updatedataUser)
 				}
 			}
 

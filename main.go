@@ -74,13 +74,21 @@ func main() {
 			fmt.Println("Telepon atau password salah")
 		}
 		if connect == "login berhasil" {
+			var input1 int
 			fmt.Println(dataUserlogin)
 			fmt.Println("silahkan pilih menu :")
 			fmt.Println("menu 3 untuk melihat profil")
 			fmt.Println("menu 4 untuk mengedit profil")
 			fmt.Println("menu 5 untuk delete account")
 			fmt.Println("masukan nomor menu : ")
-			fmt.Scanln()
+			fmt.Scanln(&input1)
+
+			switch input1 {
+			case 3:
+				{
+					feature.GetallUsers(db)
+				}
+			}
 
 		}
 

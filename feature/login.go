@@ -9,8 +9,8 @@ import (
 func LoginUser(db *sql.DB, loginUsers entities.Users) (berhasil string, dataUser entities.Users) {
 
 	var telepon entities.Users
-	row := db.QueryRow("SELECT id,name,Telepon,email,saldo FROM users WHERE telepon = ?", loginUsers.Telepon)
-	err := row.Scan(&telepon.ID, &telepon.Name, &telepon.Telepon, &telepon.Email, &telepon.Saldo)
+	row := db.QueryRow("SELECT id,name,Telepon,email,saldo,password FROM users WHERE telepon = ?", loginUsers.Telepon)
+	err := row.Scan(&telepon.ID, &telepon.Name, &telepon.Telepon, &telepon.Email, &telepon.Saldo, &telepon.Password)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			berhasil = "login gagal"

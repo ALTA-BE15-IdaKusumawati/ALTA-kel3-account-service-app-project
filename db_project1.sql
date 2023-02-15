@@ -7,7 +7,8 @@ id varchar(50) primary key not null,
 name varchar(50),
 telepon int,
 email varchar(50),
-password varchar(25)
+password varchar(25),
+saldo decimal default 0
 );
 
 create table transfer(
@@ -36,3 +37,4 @@ constraint fk_user_id_saldo foreign key (user_id)
 references users(id)
 );
 
+select id,name,telepon,email,

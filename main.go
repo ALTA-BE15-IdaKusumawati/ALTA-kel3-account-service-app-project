@@ -80,7 +80,12 @@ func main() {
 			fmt.Println("menu 3 untuk melihat profil")
 			fmt.Println("menu 4 untuk mengedit profil")
 			fmt.Println("menu 5 untuk delete account")
-			fmt.Printf("masukan nomor menu : ")
+			fmt.Println("menu 6 untuk melakukan topup")
+			fmt.Println("menu 7 untuk melihat riwayat topup")
+			fmt.Println("menu 8 untuk melakukan transfer")
+			fmt.Println("menu 9 untuk melihat riwayat transfer")
+			fmt.Println("menu 10 untuk melihat profil pengguna lain")
+			fmt.Println("masukan nomor menu : ")
 			fmt.Scanln(&input1)
 
 			switch input1 {
@@ -100,6 +105,15 @@ func main() {
 					fmt.Scanln(&updatedataUser.Email)
 
 					feature.UpdateUser(db, dataUserlogin.ID, updatedataUser)
+				}
+			case 6:
+				{
+					fmt.Println("Masukkan nominal topup")
+					var duit entities.Topup
+					fmt.Scanln(&duit.Nominal)
+					// amount := entities.Saldo{}
+					// id := entities.Users{}
+					feature.EntryTopup(db, dataUserlogin.ID, duit)
 				}
 			}
 

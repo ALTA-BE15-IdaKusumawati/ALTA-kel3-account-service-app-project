@@ -86,7 +86,7 @@ func main() {
 			switch input1 {
 			case 3:
 				{
-					feature.GetallUsers(db)
+					feature.GetUsers(db, dataUserlogin.ID)
 				}
 			}
 

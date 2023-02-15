@@ -1,0 +1,5 @@
+package feature
+
+func deleteUser() {
+
+}

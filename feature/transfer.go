@@ -111,21 +111,22 @@ func Transfer(db *sql.DB, id_pengirim string, telepon_penerima int, nominal floa
 		fmt.Println("")
 	}
 
+	updateSaldo(db, nominal, id_penerima)
 	//update saldo penerima
-	penerima, errPenerima := db.Prepare("UPDATE users SET saldo=saldo+? WHERE users.id=?")
-	if errPenerima != nil {
-		panic(errPenerima.Error())
-	}
-	has, errUpdatePenerima := penerima.Exec(nominal, id_penerima)
-	if errUpdate != nil {
-		panic(errUpdatePenerima.Error())
-	}
+	// penerima, errPenerima := db.Prepare("UPDATE users SET saldo=saldo+? WHERE users.id=?")
+	// if errPenerima != nil {
+	// 	panic(errPenerima.Error())
+	// }
+	// has, errUpdatePenerima := penerima.Exec(nominal, id_penerima)
+	// if errUpdate != nil {
+	// 	panic(errUpdatePenerima.Error())
+	// }
 
-	b, errUpdatePenerima := has.RowsAffected()
-	if errUpdate != nil {
-		panic(errUpdatePenerima.Error())
-	}
-	if b > 0 {
-		fmt.Println("")
-	}
+	// b, errUpdatePenerima := has.RowsAffected()
+	// if errUpdate != nil {
+	// 	panic(errUpdatePenerima.Error())
+	// }
+	// if b > 0 {
+	// 	fmt.Println("")
+	// }
 }

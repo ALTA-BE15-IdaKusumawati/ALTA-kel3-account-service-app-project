@@ -27,22 +27,24 @@ func EntryTopup(db *sql.DB, id string, duit entities.Topup) {
 		}
 	}
 
-	ya, err := db.Prepare("UPDATE users SET saldo=saldo+? WHERE users.id=?")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-	// var n string = duit.User_ID
-	res, errUpdate := ya.Exec(duit.Nominal, id)
-	if errUpdate != nil {
-		panic(errUpdate.Error())
-	}
+	updateSaldo(db, float32(duit.Nominal), id)
 
-	a, errUpdate := res.RowsAffected()
-	if errUpdate != nil {
-		panic(errUpdate.Error())
-	}
-	if a > 0 {
-		fmt.Printf("Selamat, saldo anda telah bertambah")
-	}
+	// ya, err := db.Prepare("UPDATE users SET saldo=saldo+? WHERE users.id=?")
+	// if err != nil {
+	// 	log.Fatal(err.Error())
+	// }
+	// // var n string = duit.User_ID
+	// res, errUpdate := ya.Exec(duit.Nominal, id)
+	// if errUpdate != nil {
+	// 	panic(errUpdate.Error())
+	// }
+
+	// a, errUpdate := res.RowsAffected()
+	// if errUpdate != nil {
+	// 	panic(errUpdate.Error())
+	// }
+	// if a > 0 {
+	// 	fmt.Printf("Selamat, saldo anda telah bertambah")
+	// }
 
 }

@@ -4,10 +4,12 @@ import (
 	"account-service-app-project/entities"
 	"database/sql"
 	"fmt"
+	"log"
 )
 
-// func Transfer(db *sql.DB, id_pengirim string, telepon_penerima int, id_penerima entities.Users, nominal float32, amount entities.Users) {
+// func Transfer(db *sql.DB, id_pengirim string, telepon_penerima int, nominal float32, balance entities.Users) (dbsub *sql.Rows) {
 func Transfer(db *sql.DB, id_pengirim string, telepon_penerima int, nominal float32, balance entities.Users) {
+	//pengecekan saldo pengirim apakah cukup atau tidak
 	querySaldo := "SELECT saldo from users where id=?"
 	row := db.QueryRow(querySaldo, id_pengirim)
 	switch err := row.Scan(&balance.Saldo); err {
@@ -16,24 +18,39 @@ func Transfer(db *sql.DB, id_pengirim string, telepon_penerima int, nominal floa
 	case nil:
 		switch {
 		case balance.Saldo >= nominal:
-			// fmt.Println("saldo akan ditransfer sebesar Rp.", nominal, ".00")
-			fmt.Println("")
+			// fmt.Println("boleh")
 		case balance.Saldo < nominal:
 			fmt.Println("Saldo Anda tidak mencukupi")
 		}
 	default:
-		panic(err)
+		// panic(err)
+		log.Fatal("error, gan", err.Error())
 	}
 
-	queryselect := "select id from users where telepon=?"
-	queryTransfer := `INSERT INTO transfer(user_id_pengirim, user_id_penerima, nominal) 
-						VALUES(?, ?, ?)`
-	rows, err := db.Query(queryselect)
-	rows.Scan(&telepon_penerima)
-	if err != nil {
-		panic(err)
+	//deklarasi query
+	var queryselect = "select id from users where telepon=?"
+	var queryTransfer = "insert into transfer(user_id_pengirim, user_id_penerima, nominal) values(?, ?, ?)"
+	//mengecek adanya telepon penerima di database
+	rows, errTransfer := db.Query(queryselect, telepon_penerima)
+	if errTransfer != nil {
+		log.Fatal("error trf", errTransfer.Error())
 	}
-	// queryTransfer := "INSERT INTO transfer(user_id_pengirim, user_id_penerima, nominal) VALUES(?, ?, ?)"
+	var prf []entities.Users //membuat penampung untuk data yang di-generate dari database
+	for rows.Next() {
+		var datarow entities.Users
+		//mengecek apakah id penerima (berdasarkan nomor telepon yang diinput) ada di database
+		errTransfer := rows.Scan(&datarow.ID)
+		if errTransfer != nil {
+			panic(errTransfer.Error())
+		}
+		prf = append(prf, datarow) //memasukkan data ke var prf
+
+	}
+	var id_penerima string //membuat variabel penampung untuk id penerima
+	for _, v := range prf {
+		id_penerima = v.ID //memasukkan data id penerima ke variabel id_penerima
+	}
+
 	statement, errPrepare := db.Prepare(queryTransfer)
 	if errPrepare != nil {
 		panic(errPrepare.Error())

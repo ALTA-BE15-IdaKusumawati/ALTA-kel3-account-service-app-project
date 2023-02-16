@@ -110,16 +110,14 @@ func main() {
 				}
 			case 8:
 				{
-					//menggunakan input userid
-
-					fmt.Println("Masukkan ID user penerima")
-					var id_penerima string
-					fmt.Scanln(&id_penerima)
+					fmt.Println("Masukkan nomor telepon penerima")
+					var teleponPenerima int
+					fmt.Scanln(&teleponPenerima)
 					var nominal float32
 					fmt.Println("Masukkan nominal")
 					fmt.Scanln(&nominal)
 					var saldo entities.Users
-					feature.Transfer(db, dataUserlogin.ID, id_penerima, nominal, saldo)
+					feature.Transfer(db, dataUserlogin.ID, teleponPenerima, nominal, saldo)
 				}
 			}
 		}

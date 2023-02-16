@@ -8,7 +8,7 @@ import (
 )
 
 // func Transfer(db *sql.DB, id_pengirim string, telepon_penerima int, nominal float32, balance entities.Users) (dbsub *sql.Rows) {
-func Transfer(db *sql.DB, id_pengirim string, telepon_penerima int, nominal float32, balance entities.Users) {
+func Transfer(db *sql.DB, id_pengirim string, telepon_penerima int, nominal int, balance entities.Users) {
 	//pengecekan data penerima
 	queryPenerima0 := "SELECT telepon from users where telepon=?"
 	data := db.QueryRow(queryPenerima0, telepon_penerima)

@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func updateSaldo(db *sql.DB, nominal float32, id_penerima string) {
+func updateSaldo(db *sql.DB, nominal int, id_penerima string) {
 	stmt, err := db.Prepare("UPDATE users SET saldo=saldo+? WHERE users.id=?")
 	if err != nil {
 		panic(err.Error())

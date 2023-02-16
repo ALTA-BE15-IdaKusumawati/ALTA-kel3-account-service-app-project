@@ -21,9 +21,12 @@ func TransferHistory(db *sql.DB, id string) {
 		}
 		historyTransfer = append(historyTransfer, datarow)
 	}
-	for _, histTransfer := range historyTransfer {
-		// fmt.Println("Tanggal Transaksi        Nominal Transaksi")
-		// fmt.Println("-------------------------------------------")
-		fmt.Println(histTransfer.Tanggal_Transaksi, "|", histTransfer.Nominal)
+	if len(historyTransfer) > 0 {
+		for _, histTransfer := range historyTransfer {
+			fmt.Println("Tanggal Transaksi   | Nominal Transaksi ")
+			fmt.Println(histTransfer.Tanggal_Transaksi, "|", histTransfer.Nominal)
+		}
+	} else {
+		fmt.Println("     Anda belum melakukan transaksi     ")
 	}
 }

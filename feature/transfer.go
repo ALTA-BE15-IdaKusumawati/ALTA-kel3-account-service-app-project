@@ -28,7 +28,6 @@ func Transfer(db *sql.DB, id_pengirim string, id_penerima string, nominal float3
 	queryTransfer := `INSERT INTO transfer(user_id_pengirim, user_id_penerima, nominal) 
 						VALUES(?, ?, ?)`
 
-
 	// queryTransfer := "INSERT INTO transfer(user_id_pengirim, user_id_penerima, nominal) VALUES(?, ?, ?)"
 	statement, errPrepare := db.Prepare(queryTransfer)
 	if errPrepare != nil {

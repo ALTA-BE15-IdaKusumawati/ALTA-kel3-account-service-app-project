@@ -6,23 +6,25 @@ import (
 	"log"
 )
 
-func LoginUser(db *sql.DB, loginUsers entities.Users) (berhasil string, dataUser entities.Users) {
+func LoginUser(db *sql.DB, loginUsers entities.Users) (statement string, dataUser entities.Users) {
 
 	var telepon entities.Users
 	row := db.QueryRow("SELECT id,name,Telepon,email,saldo,password FROM users WHERE telepon = ?", loginUsers.Telepon)
 	err := row.Scan(&telepon.ID, &telepon.Name, &telepon.Telepon, &telepon.Email, &telepon.Saldo, &telepon.Password)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			berhasil = "login gagal"
+			statement = "login gagal"
+			return statement, dataUser
 		} else {
 			log.Fatal(err)
 		}
+
 	}
 	if telepon.Password != loginUsers.Password {
-		berhasil = "login gagal"
+		statement = "login gagal"
 	} else {
-		berhasil = "login berhasil"
+		statement = "login berhasil"
 		dataUser = telepon
 	}
-	return berhasil, dataUser
+	return statement, dataUser
 }

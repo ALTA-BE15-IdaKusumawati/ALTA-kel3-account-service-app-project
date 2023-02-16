@@ -9,23 +9,48 @@ import (
 
 // func Transfer(db *sql.DB, id_pengirim string, telepon_penerima int, nominal float32, balance entities.Users) (dbsub *sql.Rows) {
 func Transfer(db *sql.DB, id_pengirim string, telepon_penerima int, nominal float32, balance entities.Users) {
-	//pengecekan saldo pengirim apakah cukup atau tidak
+	//pengecekan data penerima
+	queryPenerima0 := "SELECT telepon from users where telepon=?"
+	data := db.QueryRow(queryPenerima0, telepon_penerima)
+	errPenerima0 := data.Scan(&balance.Telepon)
+	if errPenerima0 != nil {
+		if errPenerima0 == sql.ErrNoRows {
+			fmt.Println("nomor telepon penerima belum terdaftar")
+			return
+		} else {
+			log.Fatal(errPenerima0)
+		}
+	}
+	//pengecekan saldo pengirim
 	querySaldo := "SELECT saldo from users where id=?"
 	row := db.QueryRow(querySaldo, id_pengirim)
-	switch err := row.Scan(&balance.Saldo); err {
-	case sql.ErrNoRows:
-		fmt.Println("Data tidak tersedia")
-	case nil:
-		switch {
-		case balance.Saldo >= nominal:
-			// fmt.Println("boleh")
-		case balance.Saldo < nominal:
+
+	err := row.Scan(&balance.Saldo)
+	if err == nil {
+		if balance.Saldo < nominal {
 			fmt.Println("Saldo Anda tidak mencukupi")
+			return
+		} else if balance.Saldo >= nominal {
+
+		} else {
+			log.Fatal(err)
 		}
-	default:
-		// panic(err)
-		log.Fatal("error, gan", err.Error())
 	}
+
+	// switch err := row.Scan(&balance.Saldo); err {
+	// case sql.ErrNoRows:
+	// 	fmt.Println("Data tidak tersedia")
+	// case nil:
+	// 	switch {
+	// 	case balance.Saldo >= nominal:
+	// 		// fmt.Println("boleh")
+	// 	case balance.Saldo < nominal:
+	// 		fmt.Println("Saldo Anda tidak mencukupi")
+	// 	}
+	// default:
+	// 	// panic(err)
+	// 	log.Fatal("error, gan", err.Error())
+	// }
 
 	//deklarasi query
 	var queryselect = "select id from users where telepon=?"

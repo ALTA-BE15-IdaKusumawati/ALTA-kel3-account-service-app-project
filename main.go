@@ -108,8 +108,20 @@ func main() {
 					fmt.Println("----------------------------------------")
 					feature.TopupHistory(db, dataUserlogin.ID)
 				}
-			}
+			case 8:
+				{
+					//menggunakan input userid
 
+					fmt.Println("Masukkan ID user penerima")
+					var id_penerima string
+					fmt.Scanln(&id_penerima)
+					var nominal float32
+					fmt.Println("Masukkan nominal")
+					fmt.Scanln(&nominal)
+					var saldo entities.Users
+					feature.Transfer(db, dataUserlogin.ID, id_penerima, nominal, saldo)
+				}
+			}
 		}
 
 	case 0:

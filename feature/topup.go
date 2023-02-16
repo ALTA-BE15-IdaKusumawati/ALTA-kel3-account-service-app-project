@@ -27,7 +27,7 @@ func EntryTopup(db *sql.DB, id string, duit entities.Topup) {
 		}
 	}
 
-	updateSaldo(db, float32(duit.Nominal), id)
+	updateSaldo(db, int(duit.Nominal), id)
 
 	// ya, err := db.Prepare("UPDATE users SET saldo=saldo+? WHERE users.id=?")
 	// if err != nil {

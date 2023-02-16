@@ -6,5 +6,5 @@ type Users struct {
 	Telepon  int
 	Email    string
 	Password string
-	Saldo    float32
+	Saldo    int
 }

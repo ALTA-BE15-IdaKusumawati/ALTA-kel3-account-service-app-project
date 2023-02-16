@@ -20,9 +20,13 @@ func TopupHistory(db *sql.DB, id string) {
 		}
 		history = append(history, datarow)
 	}
-	for _, hist := range history {
-		// fmt.Println("Tanggal Transaksi        Nominal Transaksi")
-		// fmt.Println("-------------------------------------------")
-		fmt.Println(hist.Tanggal_Transaksi, "|", hist.Nominal)
+	if len(history) > 0 {
+		for _, hist := range history {
+			fmt.Println("Tanggal Transaksi   | Nominal Transaksi ")
+			fmt.Println(hist.Tanggal_Transaksi, "|", hist.Nominal)
+		}
+	} else {
+		fmt.Println("     Anda belum melakukan transaksi     ")
 	}
+
 }

@@ -28,37 +28,47 @@ func main() {
 	case 1:
 
 		newUsers := entities.Users{}
+		fmt.Println("-----------------")
 		fmt.Println("Masukkan ID User:")
 		fmt.Scanln(&newUsers.ID)
+		fmt.Println("-------------------")
 		fmt.Println("Masukkan Name User:")
 		fmt.Scanln(&newUsers.Name)
+		fmt.Println("----------------------")
 		fmt.Println("Masukkan Telepon User:")
 		fmt.Scanln(&newUsers.Telepon)
+		fmt.Println("--------------------")
 		fmt.Println("Masukkan Email User:")
 		fmt.Scanln(&newUsers.Email)
+		fmt.Println("-----------------------")
 		fmt.Println("Masukkan password User:")
 		fmt.Scanln(&newUsers.Password)
-
+		
 		feature.InsertUser(db, newUsers)
+		
 
 	case 2:
 		var connect string
 		var telpon int
 		var password string
+		fmt.Println("----------------------")
 		fmt.Print("Masukkan nomor telepon: ")
 		fmt.Scanln(&telpon)
-		fmt.Print("Masukkan password: ")
+		fmt.Print("Masukkan password     : ")
 		fmt.Scanln(&password)
 
 		loginUsers := entities.Users{Telepon: telpon, Password: password}
 		connect, dataUserlogin = feature.LoginUser(db, loginUsers)
 
 		if connect == "login gagal" {
+			fmt.Println("---------------------------")
 			fmt.Println("Telepon atau password salah")
+			fmt.Println("---------------------------")
 		}
 		if connect == "login berhasil" {
 			var input1 int
-			fmt.Println("silahkan pilih menu :")
+			fmt.Println("---------------------")
+			fmt.Println("silahkan pilih menu:")
 			fmt.Println("menu 3 untuk melihat profil")
 			fmt.Println("menu 4 untuk mengedit profil")
 			fmt.Println("menu 5 untuk delete account")
@@ -79,15 +89,18 @@ func main() {
 			case 4:
 				{
 					updatedataUser := entities.Users{}
-
+					fmt.Println("--------------------------")
 					fmt.Println("Masukkan Name User:")
 					fmt.Scanln(&updatedataUser.Name)
+					fmt.Println("--------------------------")
 					fmt.Println("Masukkan Telepon User:")
 					fmt.Scanln(&updatedataUser.Telepon)
+					fmt.Println("--------------------------")
 					fmt.Println("Masukkan Email User:")
 					fmt.Scanln(&updatedataUser.Email)
-
+					fmt.Println("--------------------------")
 					feature.UpdateUser(db, dataUserlogin.ID, updatedataUser)
+					fmt.Println("--------------------------")
 				}
 			case 5:
 				{
@@ -95,55 +108,64 @@ func main() {
 				}
 			case 6:
 				{
+					fmt.Println("----------------------")
 					fmt.Println("Masukkan nominal topup")
 					var duit entities.Topup
 					fmt.Scanln(&duit.Nominal)
+					fmt.Println("----------------------")
 					feature.EntryTopup(db, dataUserlogin.ID, duit)
+					fmt.Println("----------------------")
 				}
 			case 7:
 				{
-					fmt.Println("Masukkan nomor telepon penerima")
+					fmt.Println("-------------------------------")
+					fmt.Println("Masukkan nomor telepon penerima:")
 					var teleponPenerima int
 					fmt.Scanln(&teleponPenerima)
 					var nominal int
-					fmt.Println("Masukkan nominal")
+					fmt.Println("-------------------------------")
+					fmt.Println("Masukkan nominal:")
 					fmt.Scanln(&nominal)
 					var saldo entities.Users
+					fmt.Println("-------------------------------")
 					feature.Transfer(db, dataUserlogin.ID, teleponPenerima, nominal, saldo)
+					fmt.Println("-------------------------------")
+
 				}
 			case 8:
 				{
 					fmt.Println("----------------------------------------")
 					fmt.Println("             RIWAYAT TOPUP")
 					fmt.Println("----------------------------------------")
-					fmt.Println("Tanggal Transaksi   | Nominal Transaksi ")
+					feature.TopupHistory(db, dataUserlogin.ID)					
 					fmt.Println("----------------------------------------")
-					feature.TopupHistory(db, dataUserlogin.ID)
 				}
 			case 9:
 				{
 					fmt.Println("----------------------------------------")
 					fmt.Println("           RIWAYAT TRANSFER")
 					fmt.Println("----------------------------------------")
-					fmt.Println("Tanggal Transaksi   | Nominal Transaksi ")
-					fmt.Println("----------------------------------------")
 					feature.TransferHistory(db, dataUserlogin.ID)
+					fmt.Println("----------------------------------------")
 				}
 			case 10:
 				{
+					fmt.Println("---------------------------")
 					fmt.Println("Masukkan nomor telepon user")
 					var profile entities.Users
 					fmt.Scanln(&profile.Telepon)
-					fmt.Println("---------------")
-					fmt.Println("Data Pengguna |")
+					// fmt.Println("---------------")
+					// fmt.Println("Data Pengguna |")
 					// fmt.Println("Nama | Nomor Telepon")
 					// fmt.Println("----------------------")
-					fmt.Println("-------------------------")
+					// fmt.Println("-------------------------")
 					feature.OtherUser(db, dataUserlogin.ID, profile)
 				}
 			case 0:
 				{
+					fmt.Println("-------------------------------")
 					fmt.Println("terima kasih telah bertransaksi")
+					fmt.Println("-------------------------------")
 					return
 				}
 			}

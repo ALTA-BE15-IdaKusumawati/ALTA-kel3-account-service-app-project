@@ -24,10 +24,18 @@ func OtherUser(db *sql.DB, id string, profile entities.Users) {
 		User = append(User, datarow)
 
 	}
-
-	for _, v := range User {
-		// fmt.Println(v.Name, "    |", v.Telepon)
-		fmt.Println("Nama          :", v.Name)
-		fmt.Println("Nomor Telepon :", v.Telepon)
+	if len(User) > 0 {
+		for _, v := range User {
+			// fmt.Println(v.Name, "    |", v.Telepon)
+			fmt.Println("---------------")
+			fmt.Println("Data Pengguna |")
+			fmt.Println("-------------------------")
+			fmt.Println("Nama          :", v.Name)
+			fmt.Println("Nomor Telepon :", v.Telepon)
+		}
+	} else {
+		fmt.Println("-------------------------")
+		fmt.Println("   Data tidak tersedia")
+		fmt.Println("-------------------------")
 	}
 }

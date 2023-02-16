@@ -20,9 +20,13 @@ func InsertUser(db *sql.DB, newUsers entities.Users) {
 	} else {
 		row, _ := result.RowsAffected()
 		if row > 0 {
+			fmt.Println("--------------------------")
 			fmt.Println("proses berhasil dijalankan")
+			fmt.Println("--------------------------")
 		} else {
+			fmt.Println("------------")
 			fmt.Println("proses gagal")
+			fmt.Println("------------")
 		}
 	}
 }

@@ -26,6 +26,10 @@ func GetUsers(db *sql.DB, ID string) {
 	}
 
 	for _, v := range Users {
-		fmt.Print("ID : ", v.ID, "\n", "Nama : ", v.Name, "\n", "Telepon : ", v.Telepon, "\n", "Email : ", v.Email, "\n", "Saldo : ", v.Saldo)
+		fmt.Println("ID 	 : ", v.ID)
+		fmt.Println("Nama	 : ", v.Name)
+		fmt.Println("Telepon  : ", v.Telepon)
+		fmt.Println("Email 	 : ", v.Email)
+		fmt.Println("Saldo 	 : ", v.Saldo)
 	}
 }

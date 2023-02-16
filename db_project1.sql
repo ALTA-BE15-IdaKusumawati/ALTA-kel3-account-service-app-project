@@ -29,3 +29,7 @@ created_at datetime default current_timestamp,
 constraint fk_user_id foreign key (user_id) 
 references users(id) on update cascade on delete cascade
 );
+
+UPDATE users INNER JOIN transfer ON users.id="US0001" SET saldo=saldo-5000;
+
+select * from users where id="US0001";

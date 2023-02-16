@@ -68,6 +68,7 @@ func main() {
 			fmt.Println("menu 8 untuk melakukan transfer")
 			fmt.Println("menu 9 untuk melihat riwayat transfer")
 			fmt.Println("menu 10 untuk melihat profil pengguna lain")
+			fmt.Println("menu 0 untuk membatalkan transaksi")
 			fmt.Println("masukan nomor menu : ")
 			fmt.Scanln(&input1)
 
@@ -140,6 +141,11 @@ func main() {
 					// fmt.Println("----------------------")
 					fmt.Println("-------------------------")
 					feature.OtherUser(db, dataUserlogin.ID, profile)
+				}
+			case 0:
+				{
+					fmt.Println("terima kasih telah bertransaksi")
+					return
 				}
 			}
 		}

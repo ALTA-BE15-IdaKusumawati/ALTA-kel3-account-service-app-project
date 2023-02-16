@@ -110,15 +110,25 @@ func main() {
 					feature.TopupHistory(db, dataUserlogin.ID)
 				}
 			case 8:
-				fmt.Println("Masukkan nomor telepon penerima")
-				var teleponPenerima int
-				fmt.Scanln(&teleponPenerima)
-				var nominal float32
-				fmt.Println("Masukkan nominal")
-				fmt.Scanln(&nominal)
-				var saldo entities.Users
-				feature.Transfer(db, dataUserlogin.ID, teleponPenerima, nominal, saldo)
-
+				{
+					fmt.Println("Masukkan nomor telepon penerima")
+					var teleponPenerima int
+					fmt.Scanln(&teleponPenerima)
+					var nominal float32
+					fmt.Println("Masukkan nominal")
+					fmt.Scanln(&nominal)
+					var saldo entities.Users
+					feature.Transfer(db, dataUserlogin.ID, teleponPenerima, nominal, saldo)
+				}
+			case 9:
+				{
+					fmt.Println("----------------------------------------")
+					fmt.Println("           RIWAYAT TRANSFER")
+					fmt.Println("----------------------------------------")
+					fmt.Println("Tanggal Transaksi   | Nominal Transaksi ")
+					fmt.Println("----------------------------------------")
+					feature.TransferHistory(db, dataUserlogin.ID)
+				}
 			}
 		}
 

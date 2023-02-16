@@ -89,6 +89,10 @@ func main() {
 
 					feature.UpdateUser(db, dataUserlogin.ID, updatedataUser)
 				}
+			case 5:
+				{
+					feature.DeleteUser(db, dataUserlogin.ID)
+				}
 			case 6:
 				{
 					fmt.Println("Masukkan nominal topup")

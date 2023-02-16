@@ -129,6 +129,18 @@ func main() {
 					fmt.Println("----------------------------------------")
 					feature.TransferHistory(db, dataUserlogin.ID)
 				}
+			case 10:
+				{
+					fmt.Println("Masukkan nomor telepon user")
+					var profile entities.Users
+					fmt.Scanln(&profile.Telepon)
+					fmt.Println("---------------")
+					fmt.Println("Data Pengguna |")
+					// fmt.Println("Nama | Nomor Telepon")
+					// fmt.Println("----------------------")
+					fmt.Println("-------------------------")
+					feature.OtherUser(db, dataUserlogin.ID, profile)
+				}
 			}
 		}
 

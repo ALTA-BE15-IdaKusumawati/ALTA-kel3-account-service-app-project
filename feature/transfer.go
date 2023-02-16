@@ -7,27 +7,32 @@ import (
 )
 
 // func Transfer(db *sql.DB, id_pengirim string, telepon_penerima int, id_penerima entities.Users, nominal float32, amount entities.Users) {
-func Transfer(db *sql.DB, id_pengirim string, id_penerima string, nominal float32, amount entities.Users) {
+func Transfer(db *sql.DB, id_pengirim string, telepon_penerima int, nominal float32, balance entities.Users) {
 	querySaldo := "SELECT saldo from users where id=?"
 	row := db.QueryRow(querySaldo, id_pengirim)
-	switch err := row.Scan(&amount.Saldo); err {
+	switch err := row.Scan(&balance.Saldo); err {
 	case sql.ErrNoRows:
 		fmt.Println("Data tidak tersedia")
 	case nil:
 		switch {
-		case amount.Saldo >= nominal:
+		case balance.Saldo >= nominal:
 			// fmt.Println("saldo akan ditransfer sebesar Rp.", nominal, ".00")
 			fmt.Println("")
-		case amount.Saldo < nominal:
+		case balance.Saldo < nominal:
 			fmt.Println("Saldo Anda tidak mencukupi")
 		}
 	default:
 		panic(err)
 	}
 
+	queryselect := "select id from users where telepon=?"
 	queryTransfer := `INSERT INTO transfer(user_id_pengirim, user_id_penerima, nominal) 
 						VALUES(?, ?, ?)`
-
+	rows, err := db.Query(queryselect)
+	rows.Scan(&telepon_penerima)
+	if err != nil {
+		panic(err)
+	}
 	// queryTransfer := "INSERT INTO transfer(user_id_pengirim, user_id_penerima, nominal) VALUES(?, ?, ?)"
 	statement, errPrepare := db.Prepare(queryTransfer)
 	if errPrepare != nil {

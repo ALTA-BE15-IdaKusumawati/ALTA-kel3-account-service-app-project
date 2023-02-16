@@ -14,7 +14,7 @@ saldo decimal default 0
 create table transfer(
 user_id_pengirim varchar(50),
 user_id_penerima varchar(50),
-nominal decimal,
+nominal decimal not null,
 created_at datetime default current_timestamp,
 constraint fk_user_id_pengirim foreign key (user_id_pengirim) 
 references users(id) on update cascade on delete cascade,
@@ -24,17 +24,8 @@ references users(id) on update cascade on delete cascade
 
 create table topup(
 user_id varchar(50),
-nominal decimal,
+nominal decimal not null,
 created_at datetime default current_timestamp,
 constraint fk_user_id foreign key (user_id) 
 references users(id) on update cascade on delete cascade
 );
-
-create table saldo(
-user_id varchar(50),
-nominal decimal,
-constraint fk_user_id_saldo foreign key (user_id) 
-references users(id) on update cascade on delete cascade
-);
-
-

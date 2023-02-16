@@ -69,11 +69,11 @@ func Transfer(db *sql.DB, id_pengirim string, telepon_penerima int, nominal floa
 	}
 
 	//update saldo pengirim
-	pengirim, errPengirim := db.Prepare("UPDATE users INNER JOIN transfer ON users.id=? SET saldo=saldo-?")
+	pengirim, errPengirim := db.Prepare("UPDATE users SET saldo=saldo-? WHERE users.id=?")
 	if errPengirim != nil {
 		panic(errPengirim.Error())
 	}
-	res, errUpdate := pengirim.Exec(id_pengirim, nominal)
+	res, errUpdate := pengirim.Exec(nominal, id_pengirim)
 	if errUpdate != nil {
 		panic(errUpdate.Error())
 	}
@@ -87,11 +87,11 @@ func Transfer(db *sql.DB, id_pengirim string, telepon_penerima int, nominal floa
 	}
 
 	//update saldo penerima
-	penerima, errPenerima := db.Prepare("UPDATE users INNER JOIN transfer ON users.id=? SET saldo=saldo+?")
+	penerima, errPenerima := db.Prepare("UPDATE users SET saldo=saldo+? WHERE users.id=?")
 	if errPenerima != nil {
 		panic(errPenerima.Error())
 	}
-	has, errUpdatePenerima := penerima.Exec(id_penerima, nominal)
+	has, errUpdatePenerima := penerima.Exec(nominal, id_penerima)
 	if errUpdate != nil {
 		panic(errUpdatePenerima.Error())
 	}

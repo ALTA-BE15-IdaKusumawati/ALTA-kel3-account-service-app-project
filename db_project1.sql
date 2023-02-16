@@ -17,9 +17,9 @@ user_id_penerima varchar(50),
 nominal decimal,
 created_at datetime default current_timestamp,
 constraint fk_user_id_pengirim foreign key (user_id_pengirim) 
-references users(id),
+references users(id) on update cascade on delete cascade,
 constraint fk_user_id_penerima foreign key (user_id_penerima) 
-references users(id)
+references users(id) on update cascade on delete cascade
 );
 
 create table topup(
@@ -27,14 +27,14 @@ user_id varchar(50),
 nominal decimal,
 created_at datetime default current_timestamp,
 constraint fk_user_id foreign key (user_id) 
-references users(id)
+references users(id) on update cascade on delete cascade
 );
 
 create table saldo(
 user_id varchar(50),
 nominal decimal,
 constraint fk_user_id_saldo foreign key (user_id) 
-references users(id)
+references users(id) on update cascade on delete cascade
 );
 
-select id,name,telepon,email,
+

@@ -153,11 +153,6 @@ func main() {
 						fmt.Println("Masukkan nomor telepon user")
 						var profile entities.Users
 						fmt.Scanln(&profile.Telepon)
-						// fmt.Println("---------------")
-						// fmt.Println("Data Pengguna |")
-						// fmt.Println("Nama | Nomor Telepon")
-						// fmt.Println("----------------------")
-						// fmt.Println("-------------------------")
 						feature.OtherUser(db, dataUserlogin.ID, profile)
 					}
 				case 0:
